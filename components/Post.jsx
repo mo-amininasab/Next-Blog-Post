@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import CategoryLabel from './CategoryLabel';
 
 const Post = ({ post }) => {
   return (
@@ -17,7 +18,7 @@ const Post = ({ post }) => {
         <span className="font-light text-gray-600">
           {post.frontMatter.date}
         </span>
-        <div>{post.frontMatter.category}</div>
+        <CategoryLabel>{post.frontMatter.category}</CategoryLabel>
       </div>
 
       <div className="mt-2">
