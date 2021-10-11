@@ -2,11 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-import { sortByData } from '@/utils/index';
+import { getPosts } from '@/lib/posts'
 
 import React from 'react';
 import Layout from '@/components/Layout';
-import Link from 'next/link';
 import Post from '@/components/Post';
 
 const HomePage = ({ posts, categoryName }) => {
@@ -51,20 +50,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { category_name } }) {
   const files = fs.readdirSync(path.join('posts'));
 
-  const posts = files.map((filename) => {
-    const slug = filename.replace('.md', '');
-
-    const markdownWithMeta = fs.readFileSync(
-      path.join('posts', filename),
-      'utf-8'
-    );
-    const { data: frontMatter } = matter(markdownWithMeta);
-
-    return {
-      slug,
-      frontMatter,
-    };
-  });
+  const posts = getPosts();
 
   // Filter Posts by category
   const categoryPosts = posts.filter(
@@ -73,7 +59,7 @@ export async function getStaticProps({ params: { category_name } }) {
 
   return {
     props: {
-      posts: categoryPosts.sort(sortByData),
+      posts: categoryPosts,
       categoryName: category_name,
     },
   };

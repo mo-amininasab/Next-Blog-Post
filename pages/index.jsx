@@ -1,8 +1,5 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-
 import { sortByData } from '@/utils/index';
+import { getPosts } from '@/lib/posts';
 
 import React from 'react';
 import Layout from '@/components/Layout';
@@ -31,26 +28,11 @@ const HomePage = ({ posts }) => {
 export default HomePage;
 
 export async function getStaticProps() {
-  const files = fs.readdirSync(path.join('posts'));
 
-  const posts = files.map((filename) => {
-    const slug = filename.replace('.md', '');
-
-    const markdownWithMeta = fs.readFileSync(
-      path.join('posts', filename),
-      'utf-8'
-    );
-    const { data: frontMatter } = matter(markdownWithMeta);
-
-    return {
-      slug,
-      frontMatter,
-    };
-  });
 
   return {
     props: {
-      posts: posts.sort(sortByData).slice(0, 6),
+      posts: getPosts().sort(sortByData).slice(0, 6),
     },
   };
 }
