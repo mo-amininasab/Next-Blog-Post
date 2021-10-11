@@ -6,9 +6,9 @@ import { sortByData } from '../../../utils/index';
 import { POSTS_PER_PAGE } from '../../../config/index';
 
 import React from 'react';
-import Layout from '../../../components/Layout';
-import Post from '../../../components/Post';
-import Pagination from '../../../components/Pagination';
+import Layout from '@/components/Layout';
+import Post from '@/components/Post';
+import Pagination from '@/components/Pagination';
 
 const BlogPage = ({ posts, numOfPages, currentPage }) => {
   return (

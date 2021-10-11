@@ -2,12 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-import { sortByData } from '../utils/index';
+import { sortByData } from '@/utils/index';
 
 import React from 'react';
-import Layout from '../components/Layout';
+import Layout from '@/components/Layout';
 import Link from 'next/link';
-import Post from '../components/Post';
+import Post from '@/components/Post';
 
 const HomePage = ({ posts }) => {
   return (
